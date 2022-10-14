@@ -27,7 +27,7 @@
           <li class="nav-item">
             {% if request.user.is_authenticated %}
             <!-- 리뷰 작성  -->
-            <a class="nav-link active fw-bold" href="">리뷰 작성</a>
+            <a class="nav-link active fw-bold" href="{% url 'reviews:create' %}">리뷰 작성</a>
             {% endif %}
           </li>
         </ul>
