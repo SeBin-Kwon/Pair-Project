@@ -13,7 +13,7 @@
     {% for review in review %}
     <tr>
       <td>
-        <a href="#" class=" text-center text-decoration-none text-white">{{ review.title }}</a>
+        <a href="#" class=" text-center text-decoration-none text-white"><a href="{% url 'reviews:detail' review.pk %}">{{ review.title }}</a>
       </td>
     </tr>
     {% endfor %}
