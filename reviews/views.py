@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
-
 from reviews.models import Review
 from .forms import ReviewForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def create(request):
     if request.method == 'POST':
         form = ReviewForm(request.POST)
@@ -31,6 +32,7 @@ def detail(request, pk):
     }
     return render(request, 'reviews/detail.html', context)
 
+@login_required
 def update(request, pk):
     review = Review.objects.get(pk=pk)
     if request.method == "POST":
@@ -45,3 +47,8 @@ def update(request, pk):
         'review': review,
     }
     return render(request, 'reviews/update.html', context)
+
+@login_required
+def delete(request, pk):
+    Review.objects.get(pk=pk).delete()
+    return redirect('reviews:index')

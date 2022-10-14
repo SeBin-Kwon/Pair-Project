@@ -4,6 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import redirect, render
 from django.contrib.auth import get_user_model
 from .forms import CustomUserCreationForm, CustomUserChangeForm
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -14,7 +15,8 @@ def signup(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            auth_login(request, user)
             return redirect('accounts:main')
     else:
         form = CustomUserCreationForm()
@@ -36,6 +38,7 @@ def login(request):
     }
     return render(request, 'accounts/login.html', context)
 
+@login_required
 def index(request):
     users = get_user_model().objects.all()
     context = {
@@ -43,6 +46,7 @@ def index(request):
     }
     return render(request, 'accounts/index.html', context)
 
+@login_required
 def detail(request, pk):
     user = get_user_model().objects.get(pk=pk)
     context = {
@@ -50,6 +54,7 @@ def detail(request, pk):
     }
     return render(request, 'accounts/detail.html', context)
 
+@login_required
 def update(request, pk):
     if request.method == 'POST':
         form = CustomUserChangeForm(request.POST, instance=request.user)
@@ -63,6 +68,7 @@ def update(request, pk):
     }
     return render(request,'accounts/update.html', context)
 
+@login_required
 def logout(request):
     auth_logout(request)
     return redirect('accounts:main')

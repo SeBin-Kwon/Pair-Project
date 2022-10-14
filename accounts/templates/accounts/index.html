@@ -2,10 +2,11 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-<h1>User List</h1>
+<div class="container mt-5">
+<h1 class="mb-4">User List</h1>
 {% for user in users %}
-<a href="{% url 'accounts:detail' user.pk %}">{{user.username}}</a>
+<h3><a class="text-light text-decoration-none" href="{% url 'accounts:detail' user.pk %}">‣ {{user.username}}</a></h3>
 {% endfor %}
-
+</div>
 
 {% endblock %}

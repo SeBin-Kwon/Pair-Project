@@ -2,10 +2,12 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-<h1>수정하기</h1>
+<div class="container mt-5">
+<h1 class="mb-4">수정하기</h1>
 <form method="POST">
   {% csrf_token %}
   {% bootstrap_form form %}
-  <input class="btn btn-outline-primary" type="submit" value="수정 완료">
+  <input class="btn btn-primary" type="submit" value="수정 완료">
 </form>
+</div>
 {% endblock %}
