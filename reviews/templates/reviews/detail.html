@@ -2,9 +2,9 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-  <h1>{{ review.title }}</h1>
-  <p>{{ review.content }}</p>
-  <a href="{% url 'reviews:index' %}" class="btn btn-outline-primary">뒤로가기</a>
-  <a href="{% url 'accounts:main' %}" class="btn btn-outline-primary">수정</a>
-  <a href="{% url 'accounts:main' %}" class="btn btn-outline-primary">삭제</a>
+<h1>{{ review.title }}</h1>
+<p>{{ review.content }}</p>
+<a href="{% url 'reviews:index' %}" class="btn btn-outline-primary">뒤로가기</a>
+<a href="{% url 'reviews:update' review.pk %}" class="btn btn-outline-primary">수정</a>
+<a href="{% url 'accounts:main' %}" class="btn btn-outline-primary">삭제</a>
 {% endblock %}

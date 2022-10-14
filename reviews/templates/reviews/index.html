@@ -10,10 +10,12 @@
     </tr>
   </thead>
   <tbody>
-    {% for review in review %}
+    {% for review in reviews %}
     <tr>
       <td>
-        <a href="#" class=" text-center text-decoration-none text-white"><a href="{% url 'reviews:detail' review.pk %}">{{ review.title }}</a>
+        <a href="{% url 'reviews:detail' review.pk %}" class="text-center text-decoration-none text-white">
+          {{ review.title }}
+        </a>
       </td>
     </tr>
     {% endfor %}
