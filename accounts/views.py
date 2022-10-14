@@ -1,7 +1,7 @@
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import redirect, render
-
+from django.contrib.auth import get_user_model
 from .forms import CustomUserCreationForm
 
 
@@ -34,3 +34,10 @@ def login(request):
         'form': form
     }
     return render(request, 'accounts/login.html', context)
+
+def index(request):
+    users = get_user_model().objects.all()
+    context = {
+        'users' : users
+    }
+    return render(request, 'accounts/index.html', context)
