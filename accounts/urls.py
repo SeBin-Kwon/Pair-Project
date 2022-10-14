@@ -10,4 +10,5 @@ urlpatterns = [
     path('accounts/login', views.login, name='login'),
     path('accounts/', views.index, name='index'),
     path('accounts/<int:pk>', views.detail, name='detail'),
+    path('accounts/<int:pk>/update', views.update, name='update'),
 ]
