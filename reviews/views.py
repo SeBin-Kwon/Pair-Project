@@ -18,9 +18,9 @@ def create(request):
     return render(request, 'reviews/create.html', context)
 
 def index(request):
-    review = Review.objects.order_by('-pk')
+    reviews = Review.objects.order_by('-pk')
     context = {
-        'review': review
+        'reviews': reviews
     }
     return render(request, 'reviews/index.html', context)
 
@@ -30,3 +30,18 @@ def detail(request, pk):
         'review' : review
     }
     return render(request, 'reviews/detail.html', context)
+
+def update(request, pk):
+    review = Review.objects.get(pk=pk)
+    if request.method == "POST":
+        form = ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            form.save()
+            return redirect('reviews:detail', review.pk)
+    else:
+        form = ReviewForm(instance=review)
+    context = {
+        'form': form,
+        'review': review,
+    }
+    return render(request, 'reviews/update.html', context)
