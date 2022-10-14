@@ -8,6 +8,7 @@
   {% csrf_token %}
   {% bootstrap_form form %}
   <input class="btn btn-primary" type="submit" value="수정 완료">
+  <a class="btn btn-outline-danger" href="{%  url 'accounts:delete' %}">회원탈퇴</a>
 </form>
 </div>
 {% endblock %}

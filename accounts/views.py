@@ -30,7 +30,7 @@ def login(request):
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())
-            return redirect('accounts:main')
+            return redirect(request.GET.get('next') or 'accounts:main')
     else:
         form = AuthenticationForm()
     context = {
@@ -71,4 +71,10 @@ def update(request, pk):
 @login_required
 def logout(request):
     auth_logout(request)
+    return redirect('accounts:main')
+
+@login_required
+def delete(request):
+    request.user.delete()
+    auth_logout(request) 
     return redirect('accounts:main')
