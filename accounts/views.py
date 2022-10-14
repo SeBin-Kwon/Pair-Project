@@ -2,7 +2,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import redirect, render
 from django.contrib.auth import get_user_model
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm
 
 
 # Create your views here.
@@ -43,8 +43,21 @@ def index(request):
     return render(request, 'accounts/index.html', context)
 
 def detail(request, pk):
-    users = get_user_model().objects.get(pk=pk)
+    user = get_user_model().objects.get(pk=pk)
     context = {
-        'users':users,
+        'user':user,
     }
     return render(request, 'accounts/detail.html', context)
+
+def update(request, pk):
+    if request.method == 'POST':
+        form = CustomUserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:detail', request.user.pk)
+    else:
+        form = CustomUserChangeForm(instance=request.user)
+    context = {
+        'form' : form
+    }
+    return render(request,'accounts/update.html', context)
