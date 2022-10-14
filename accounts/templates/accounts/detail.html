@@ -2,15 +2,17 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-<h1>{{user.username}}님의 프로필</h1>
+<div class="container mt-5">
+<h1 class="mb-4">{{user.username}}님의 프로필</h1>
 <p>email: {{user.email}}</p>
 <p>name: {{user.full_name}}</p>
 {% if request.user == user %}
-  <a href="{% url 'accounts:index' %}" class="btn btn-outline-primary">뒤로가기</a>
-  <a href="{% url 'accounts:main' %}" class="btn btn-outline-primary">홈으로</a>
-  <a href="{% url 'accounts:update' user.pk %}" class="btn btn-outline-primary">수정하기</a>
+  <a href="{% url 'accounts:index' %}" class="btn btn-secondary">뒤로가기</a>
+  <a href="{% url 'accounts:main' %}" class="btn btn-primary">홈으로</a>
+  <a href="{% url 'accounts:update' user.pk %}" class="btn btn-success">수정하기</a>
 {% else %}
-  <a href="{% url 'accounts:index' %}" class="btn btn-outline-primary">뒤로가기</a>
-  <a href="{% url 'accounts:main' %}" class="btn btn-outline-primary">홈으로</a>
+  <a href="{% url 'accounts:index' %}" class="btn btn-secondary">뒤로가기</a>
+  <a href="{% url 'accounts:main' %}" class="btn btn-primary">홈으로</a>
 {% endif %}
+</div>
 {% endblock %}
