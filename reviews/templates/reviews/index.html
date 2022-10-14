@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<h1>Review List</h1>
+<table class="table table-dark table-hover text-center">
+  <thead>
+    <tr>
+      <th scope="col" class="text-center ps-4">리뷰 제목</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for review in review %}
+    <tr>
+      <td>
+        <a href="#" class=" text-center text-decoration-none text-white">{{ review.title }}</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
